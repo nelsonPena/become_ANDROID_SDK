@@ -1,0 +1,2 @@
+include ':app', ':becomedigitalsdk-debug'
+rootProject.name='My Application'
