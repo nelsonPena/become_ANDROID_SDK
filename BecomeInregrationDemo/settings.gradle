@@ -1,2 +1,2 @@
-include ':app', ':becomedigitalsdk-debug'
+include ':app', ':becomedigitalsdk-release'
 rootProject.name='My Application'
