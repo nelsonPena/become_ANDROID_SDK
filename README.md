@@ -1,5 +1,8 @@
 # Documentación de Become Android SDK
 Este es un espacio para conocer a cerca de la app Become para validación biométrica de identidad en el sistema Android.
+<p align="center">
+  <img src="https://github.com/Becomedigital/become_ANDROID_SDK/blob/master/Pantalla_Android.png" width="284" height="572">
+</p>
 
 ## Configuraciones de Gradle
 ### Instalación de Become
