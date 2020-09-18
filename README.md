@@ -1,27 +1,53 @@
 # Documentación de Become Android SDK
 Este es un espacio para conocer a cerca de la app Become para validación biométrica de identidad en el sistema Android.
+<p align="center">
+  <img src="https://github.com/Becomedigital/become_ANDROID_SDK/blob/master/Pantalla_Android.png" width="284" height="572">
+</p>
 
 ## Configuraciones de Gradle
-### Instalación de Become
 
-1. El archivo build.grade debe contar con una referencia al repositorio:
-  
-		 jcenter()
-       
- 2. Abra el archivo build.gradle dentro del directorio del módulo de su aplicación e incluya las siguientes dependencias en el archivo build.gradle de su aplicación:
+ 1. Dentro del archivo build.gradle debe adicionar el siguiente fragmento de código:
  
-		 implementation 'com.becomedigital:sdk-Android:LATEST_VERSION'
+		 android {
+		    compileOptions {
+		        sourceCompatibility = 1.8
+				targetCompatibility = 1.8
+		  }
+		}
+		
+2. El archivo build.grade debe contar con una referencia al repositorio:
+	
+		maven { url 'https://jitpack.io' }
+
+<p align="center">
+  <img src="https://github.com/Becomedigital/become_ANDROID_SDK/blob/master/build_gradle.png">
+</p>
+
+### Implementación de módulos requeridos
+Cómo primera medida es necesaria la implementacion de los siguientes módulos:
+
+        implementation 'androidx.navigation:navigation-fragment:2.3.0'
+	    implementation 'androidx.navigation:navigation-ui:2.3.0'
+	    implementation 'com.github.bumptech.glide:glide:4.10.0'
+	    implementation 'com.squareup.okhttp3:okhttp:4.2.2
+  
+### Implementación de la SDK Become
+       
+ 1. Abra el archivo build.gradle dentro del directorio del módulo de su aplicación e incluya las siguientes dependencias en el archivo build.gradle de su aplicación:
+ 
+		 implementation 'com.github.Becomedigital:become_ANDROID_SDK:LATEST_VERSION'
 		 
 	Ejemplo:
 		 
-		 implementation 'com.becomedigital:sdk-Android:2.1.1'
- 
+		 implementation 'com.github.Becomedigital:become_ANDROID_SDK:2.2.4'
+		 
  3. Al realizar los pasos anteriores, debe sincronizar su proyecto con gradle.
  
  ## Inicialización de la SDK
 En el método onCreate () de su clase de aplicación, inicialice Become utilizando el siguiente fragmento de código:
 
 	public class MainActivity extends AppCompatActivity {
+    
     //Con el fin de manejar las respuestas de inicio de sesión, debe crear un callback utilizando el siguiente fragmento de código
     private BecomeCallBackManager mCallbackManager = BecomeCallBackManager.createNew ( );
 
@@ -30,27 +56,25 @@ En el método onCreate () de su clase de aplicación, inicialice Become utilizan
 	    super.onCreate (savedInstanceState);
 	    setContentView (R.layout.activity_main);
 
-    //Parámetros de configuración: El valor de los parámetros debe ser solicitado al contratar el servicio
-    String validatiopnTypes =  "PASSPORT/LICENSE/DNI/VIDEO" ;  
-    String clientSecret =  "FKLDM63GPH89TDSDFDSGFGISBWRQA25" ;  
-    String clientId =  "abc_def" ;  
-    String contractId =  "7";
+        //Parámetros de configuración: El valor de los parámetros debe ser solicitado al contratar el servicio
+        String validatiopnTypes =  "PASSPORT/LICENSE/DNI/VIDEO" ;  
+        String clientSecret =  "FKLDM63GPH89TDSDFDSGFGISBWRQA25" ;  
+        String clientId =  "abc_def" ;  
+        String contractId =  "7";
 
-    //Instancia para iniciar la interfaz
-    BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
-        new BDIVConfig (clientId,  
-                clientSecret,  
-                contractId,  
-                validatiopnTypes,  
-                true,  
-                null  
-    ));
+        //Instancia para iniciar la interfaz
+        BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
+            new BDIVConfig (clientId,  
+                    clientSecret,  
+                    contractId,  
+                    validatiopnTypes,  
+                    true,  
+                    null  
+        ));
 	  }
 	}
 
-
-
- ## Posibles Errores
+## Posibles Errores
 
 **1. Error con parámetros vacíos** 
 Los siguientes parámetros son necesarios para la activación de la SDK por lo tanto su valor no debe ser vacío.
@@ -197,102 +221,95 @@ Ejemplo de la respuesta:
 Esta sección se encarga de proporcionar el fragmento de código para la implementación final del proceso.
 
 	public class MainActivity extends AppCompatActivity {  
-  	    private BecomeCallBackManager mCallbackManager = BecomeCallBackManager.createNew ( );  
-	  
-	  @SuppressLint("WrongThread")  
-	  @Override  
-	  protected void onCreate(Bundle savedInstanceState) {  
-	        super.onCreate (savedInstanceState);  
-	        setContentView (R.layout.activity_main);  
-	  
-	  Bitmap decodeResource = BitmapFactory.decodeResource (getResources ( ), R.drawable.become_icon);  
-	  ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream ( );  
-	  
-	  decodeResource.compress (Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);  
-	  byte[] byteArray = byteArrayOutputStream.toByteArray ( );  
-	  
-	  TextView textResponse = findViewById (R.id.textReponse);  
-	  EditText textClientSecret = findViewById (R.id.cliensecretText);  
-	  EditText textClientId = findViewById (R.id.clienidText);  
-	  EditText textContractId = findViewById (R.id.ContractIdText);  
-	  EditText textVlidationType = findViewById (R.id.validationType);  
-	  Button btnAut = findViewById (R.id.btnAuth);  
-	  btnAut.setOnClickListener (view -> {  
-	  String validatiopnTypes = textVlidationType.getText ( ).toString ( ).isEmpty ( ) ? "VIDEO" : textVlidationType.getText ( ).toString ( );  
-	  String clientSecret = textClientSecret.getText ( ).toString ( ).isEmpty ( ) ? "FKLDM63GPH89TISBXNZ4YJUE57WRQA25" : textClientSecret.getText ( ).toString ( );  
-	  String clientId = textClientId.getText ( ).toString ( ).isEmpty ( ) ? "acc_demo" : textClientId.getText ( ).toString ( );  
-	  String contractId = textContractId.getText ( ).toString ( ).isEmpty ( ) ? "2" : textContractId.getText ( ).toString ( );  
-	  
-	  BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
-	      new BDIVConfig (clientId,  
-	      clientSecret,  
-	      contractId,  
-	      validatiopnTypes,  
-	      true,  
-	      byteArray  
-	  ));  
-    
-	  BecomeResponseManager.getInstance ( ).registerCallback (mCallbackManager, new BecomeInterfaseCallback ( ) {  
-	    @Override  	  
-	    public void onSuccess(final ResponseIV responseIV) {  
-	      String id = responseIV.getId ( );  
-	      String created_at = responseIV.getCreated_at ( );  
-	      String company = responseIV.getCompany ( );  
-	      String fullname = responseIV.getFullname ( );  
-	      String birth = responseIV.getBirth ( );  
-	      String document_type = responseIV.getDocument_type ( );  
-	      String document_number = responseIV.getDocument_number ( );  
-	      Boolean face_match = responseIV.getFace_match ( );  
-	      Boolean template = responseIV.getTemplate ( );  
-	      Boolean alteration = responseIV.getAlteration ( );  
-	      Boolean watch_list = responseIV.getWatch_list ( );  
-	      String comply_advantage_result = responseIV.getComply_advantage_result ( );  
-	      String comply_advantage_url = responseIV.getComply_advantage_url ( );  
-	      String verification_status = responseIV.getVerification_status ( );  
-	      String message = responseIV.getMessage ( );  
-	      Integer responseStatus = responseIV.getResponseStatus ( );  
-	      String textFinal = "id: " +  
-	                             "\ncreated_at: " + created_at +  
-	                             "\ncompany: " + company +  
-	                             "\nfullname: " + fullname +  
-	                             "\nbirth: " + birth +  
-	                             "\ndocument_type: " + document_type +  
-	                             "\ndocument_number: " + document_number +  
-	                             "\nface_match: " + face_match +  
-	                             "\ntemplate: " + template +  
-	                             "\nalteration: " + alteration +  
-	                             "\nwatch_list: " + watch_list +  
-	                             "\ncomply_advantage_result: " + comply_advantage_result +  
-	                             "\ncomply_advantage_url: " + comply_advantage_url +  
-	                             "\nverification_status: " + verification_status +  
-	                             "\nmessage: " + message +  
-	                             "\nresponseStatus: " + responseStatus;  
-	  
-	  textResponse.setText (textFinal);  
-	  Log.d ("responseIV", textFinal);  
-	  }  
-	  
-	  @Override  
-	  public void onCancel() {  
-	      textResponse.setText ("Cancelado por el usuario ");	  
-	  }  
-	  
-	  @Override  
-	  public void onError(LoginError pLoginError) {  
-	      textResponse.setText (pLoginError.getMessage ( ));  
-	      Log.d ("Error", pLoginError.getMessage ( ));  
-	  }  
-	  
-	       });  
-	     });  	  
- 	   }  
-	}
+          	    private BecomeCallBackManager mCallbackManager = BecomeCallBackManager.createNew ( );  
+        	  
+        	  @SuppressLint("WrongThread")  
+        	  @Override  
+        	  protected void onCreate(Bundle savedInstanceState) {  
+        	        super.onCreate (savedInstanceState);  
+        	        setContentView (R.layout.activity_main);  
+        	  
+        	  Bitmap decodeResource = BitmapFactory.decodeResource (getResources ( ), R.drawable.become_icon);  
+        	  ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream ( );  
+        	  
+        	  decodeResource.compress (Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);  
+        	  byte[] byteArray = byteArrayOutputStream.toByteArray ( );  
+        	  
+        	  TextView textResponse = findViewById (R.id.textReponse);  
+        	  EditText textClientSecret = findViewById (R.id.cliensecretText);  
+        	  EditText textClientId = findViewById (R.id.clienidText);  
+        	  EditText textContractId = findViewById (R.id.ContractIdText);  
+        	  EditText textVlidationType = findViewById (R.id.validationType);  
+        	  Button btnAut = findViewById (R.id.btnAuth);  
+        	  btnAut.setOnClickListener (view -> {  
+        	  String validatiopnTypes = textVlidationType.getText ( ).toString ( ).isEmpty ( ) ? "VIDEO" : textVlidationType.getText ( ).toString ( );  
+        	  String clientSecret = textClientSecret.getText ( ).toString ( ).isEmpty ( ) ? "FKLDM63GPH89TISBXNZ4YJUE57WRQA25" : textClientSecret.getText ( ).toString ( );  
+        	  String clientId = textClientId.getText ( ).toString ( ).isEmpty ( ) ? "acc_demo" : textClientId.getText ( ).toString ( );  
+        	  String contractId = textContractId.getText ( ).toString ( ).isEmpty ( ) ? "2" : textContractId.getText ( ).toString ( );  
+        	  
+        	  BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
+        	      new BDIVConfig (clientId,  
+        	      clientSecret,  
+        	      contractId,  
+        	      validatiopnTypes,  
+        	      true,  
+        	      byteArray  
+        	  ));  
+            
+        	  BecomeResponseManager.getInstance ( ).registerCallback (mCallbackManager, new BecomeInterfaseCallback ( ) {  
+        	    @Override  	  
+        	    public void onSuccess(final ResponseIV responseIV) {  
+        	      String id = responseIV.getId ( );  
+        	      String created_at = responseIV.getCreated_at ( );  
+        	      String company = responseIV.getCompany ( );  
+        	      String fullname = responseIV.getFullname ( );  
+        	      String birth = responseIV.getBirth ( );  
+        	      String document_type = responseIV.getDocument_type ( );  
+        	      String document_number = responseIV.getDocument_number ( );  
+        	      Boolean face_match = responseIV.getFace_match ( );  
+        	      Boolean template = responseIV.getTemplate ( );  
+        	      Boolean alteration = responseIV.getAlteration ( );  
+        	      Boolean watch_list = responseIV.getWatch_list ( );  
+        	      String comply_advantage_result = responseIV.getComply_advantage_result ( );  
+        	      String comply_advantage_url = responseIV.getComply_advantage_url ( );  
+        	      String verification_status = responseIV.getVerification_status ( );  
+        	      String message = responseIV.getMessage ( );  
+        	      Integer responseStatus = responseIV.getResponseStatus ( );  
+        	      String textFinal = "id: " +  
+        	            "\ncreated_at: " + created_at +  
+        	            "\ncompany: " + company +  
+        	            "\nfullname: " + fullname +  
+        	            "\nbirth: " + birth +  
+        	            "\ndocument_type: " + document_type +  
+        	            "\ndocument_number: " + document_number +  
+        	            "\nface_match: " + face_match +  
+        	            "\ntemplate: " + template +  
+        	            "\nalteration: " + alteration +  
+        	            "\nwatch_list: " + watch_list +  
+        	            "\ncomply_advantage_result: " + comply_advantage_result +  
+        	            "\ncomply_advantage_url: " + comply_advantage_url +  
+        	            "\nverification_status: " + verification_status +  
+        	            "\nmessage: " + message +  
+        	            "\nresponseStatus: " + responseStatus;  
+        	  }  
+        	  
+              @Override  
+              public void onCancel() {  
+                  // Respuesta cancelado por usuario
+              }  
+        	  
+              @Override  
+              public void onError(LoginError pLoginError) {  
+                  // Respuesta error en el proceso
+              }        
+          });  	  
+        }  
+      }
 
 ## Requerimientos
 
 * **Tecnologias**
 	
-	Android
+	Android 5 en adelante
 	
 ## Vídeo de integración del SDK Become para Android
-
