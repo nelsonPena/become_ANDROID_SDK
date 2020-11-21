@@ -1,5 +1,5 @@
 # Documentación de Become Android SDK
-Este es un espacio para conocer a cerca de la app Become para validación biométrica de identidad en el sistema Android.
+Este es un espacio para conocer a cerca del SDK Android de Become para la validación de identidad.
 <p align="center">
   <img src="https://github.com/Becomedigital/become_ANDROID_SDK/blob/master/Pantalla_Android.png" width="284" height="572">
 </p>
@@ -58,9 +58,9 @@ En el método onCreate () de su clase de aplicación, inicialice Become utilizan
 
         //Parámetros de configuración: El valor de los parámetros debe ser solicitado al contratar el servicio
         String validatiopnTypes =  "PASSPORT/LICENSE/DNI/VIDEO" ;  
-        String clientSecret =  "FKLDM63GPH89TDSDFDSGFGISBWRQA25" ;  
-        String clientId =  "abc_def" ;  
-        String contractId =  "7";
+        String clientSecret =  "your client Secret here" ;  
+        String clientId =  "your client ID here" ;  
+        String contractId =  "your contract ID here";
 
         //Instancia para iniciar la interfaz
         BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
@@ -313,3 +313,5 @@ Esta sección se encarga de proporcionar el fragmento de código para la impleme
 	Android 5 en adelante
 	
 ## Vídeo de integración del SDK Become para Android
+[![Become](https://github.com/Becomedigital/become_ANDROID_SDK/blob/master/Video.png)](https://www.youtube.com/watch?v=ggpLGHeaFSg&ab_channel=BecomeDigital)
+
