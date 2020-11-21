@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         EditText textVlidationType = findViewById (R.id.validationType);
         Button btnAut = findViewById (R.id.btnAuth);
         btnAut.setOnClickListener (view -> {
-            String validatiopnTypes = textVlidationType.getText ( ).toString ( ).isEmpty ( ) ? "VIDEO" : textVlidationType.getText ( ).toString ( );
+            String validatiopnTypes = textVlidationType.getText ( ).toString ( ).isEmpty ( ) ? "VIDEO/DNI" : textVlidationType.getText ( ).toString ( );
             String clientSecret = textClientSecret.getText ( ).toString ( ).isEmpty ( ) ? "FKLDM63GPH89TISBXNZ4YJUE57WRQA25" : textClientSecret.getText ( ).toString ( );
             String clientId = textClientId.getText ( ).toString ( ).isEmpty ( ) ? "acc_demo" : textClientId.getText ( ).toString ( );
             String contractId = textContractId.getText ( ).toString ( ).isEmpty ( ) ? "2" : textContractId.getText ( ).toString ( );
