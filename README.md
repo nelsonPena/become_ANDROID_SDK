@@ -26,10 +26,13 @@ Este es un espacio para conocer a cerca del SDK Android de Become para la valida
 ### Implementación de módulos requeridos
 Cómo primera medida es necesaria la implementacion de los siguientes módulos:
 
-        implementation 'androidx.navigation:navigation-fragment:2.3.0'
-	    implementation 'androidx.navigation:navigation-ui:2.3.0'
-	    implementation 'com.github.bumptech.glide:glide:4.10.0'
-	    implementation 'com.squareup.okhttp3:okhttp:4.2.2
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.3.0'
+    implementation 'androidx.navigation:navigation-ui:2.3.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
   
 ### Implementación de la SDK Become
        
@@ -39,7 +42,7 @@ Cómo primera medida es necesaria la implementacion de los siguientes módulos:
 		 
 	Ejemplo:
 		 
-		 implementation 'com.github.Becomedigital:become_ANDROID_SDK:2.2.4'
+		 implementation 'com.github.Becomedigital:become_ANDROID_SDK:2.2.5'
 		 
  3. Al realizar los pasos anteriores, debe sincronizar su proyecto con gradle.
  
