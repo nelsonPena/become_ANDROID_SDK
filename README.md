@@ -32,7 +32,7 @@ Cómo primera medida es necesaria la implementacion de los siguientes módulos:
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.2.2
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
   
 ### Implementación de la SDK Become
        
