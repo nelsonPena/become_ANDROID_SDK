@@ -573,7 +573,7 @@ public class DocumentCaptureFragment extends Fragment
                 Size largest = Collections.max (
                         Arrays.asList (map.getOutputSizes (ImageFormat.JPEG)),
                         new DocumentCaptureFragment.CompareSizesByArea ( ));
-                mImageReader = ImageReader.newInstance (largest.getWidth ( ), largest.getHeight ( ),
+                mImageReader = ImageReader.newInstance (1080, 720,
                         ImageFormat.JPEG, /*maxImages*/2);
                 mImageReader.setOnImageAvailableListener (
                         mOnImageAvailableListener, mBackgroundHandler);
