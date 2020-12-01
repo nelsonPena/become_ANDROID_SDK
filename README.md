@@ -25,8 +25,10 @@ Este es un espacio para conocer a cerca del SDK Android de Become para la valida
 
 ### Implementación de módulos requeridos
 Cómo primera medida es necesaria la implementacion de los siguientes módulos:
-
-        implementation 'androidx.navigation:navigation-fragment:2.3.0'
+           implementation 'androidx.appcompat:appcompat:1.2.0'
+            implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+            implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+            implementation 'androidx.navigation:navigation-fragment:2.3.0'
 	    implementation 'androidx.navigation:navigation-ui:2.3.0'
 	    implementation 'com.github.bumptech.glide:glide:4.10.0'
 	    implementation 'com.squareup.okhttp3:okhttp:4.2.2
