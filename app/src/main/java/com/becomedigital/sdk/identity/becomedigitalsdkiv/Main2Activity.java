@@ -11,6 +11,11 @@ import com.becomedigital.sdk.identity.becomedigitalsdk.callback.LoginError;
 import com.becomedigital.sdk.identity.becomedigitalsdk.models.BDIVConfig;
 import com.becomedigital.sdk.identity.becomedigitalsdk.models.ResponseIV;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class Main2Activity extends AppCompatActivity {
 
     //Con el fin de manejar las respuestas de inicio de sesión, debe crear un callback utilizando el siguiente fragmento de código
@@ -26,6 +31,9 @@ public class Main2Activity extends AppCompatActivity {
         String clientSecret = "FKLDM63GPH89TDSDFDSGFGISBWRQA25";
         String clientId = "abc_def";
         String contractId = "7";
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault());
+        String inActiveDate = format1.format(currentTime);
 
         //Instancia para iniciar la interfaz
         BecomeResponseManager.getInstance ( ).startAutentication (Main2Activity.this,
@@ -34,7 +42,8 @@ public class Main2Activity extends AppCompatActivity {
                         contractId,
                         validatiopnTypes,
                         true,
-                        null
+                        null,
+                        inActiveDate
                 ));
 
         BecomeResponseManager.getInstance ( ).registerCallback (mCallbackManager, new BecomeInterfaseCallback ( ) {

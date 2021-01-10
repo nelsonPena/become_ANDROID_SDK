@@ -24,8 +24,30 @@ public class ResponseIV implements Parcelable, Serializable {
     private String comply_advantage_result;
     private String comply_advantage_url;
     private String verification_status;
+    private String device_model;
+    private String os_version;
+    private String browser_major;
+    private String browser_version;
+    private String ua;
+    private String device_type;
+    private String device_vendor;
+    private String os_name;
+    private String browser_name;
+    private String issuePlace;
+    private String emissionDate;
+    private String ageRange;
+    private Integer savingAccountsCount;
+    private Integer financialIndustryDebtsCount;
+    private Integer solidarityIndustryDebtsCount;
+    private Integer serviceIndustryDebtsCount;
+    private Integer commercialIndustryDebtsCount;
+    private String ip;
+    private String frontImgUrl;
+    private String backImgUrl;
+    private String selfiImageUrl;
     private String message;
     private Integer responseStatus;
+
 
 
     public ResponseIV(Integer responseStatus, String message) {
@@ -33,7 +55,44 @@ public class ResponseIV implements Parcelable, Serializable {
         this.message = message;
     }
 
-    public ResponseIV(String id, String created_at, String company, String fullname, String birth, String document_type, String document_number, Boolean face_match, Boolean template, Boolean alteration, Boolean watch_list, String comply_advantage_result, String comply_advantage_url, String verification_status, String message, Integer responseStatus) {
+
+    public ResponseIV(String id,
+                      String created_at,
+                      String company,
+                      String fullname,
+                      String birth,
+                      String document_type,
+                      String document_number,
+                      Boolean face_match,
+                      Boolean template,
+                      Boolean alteration,
+                      Boolean watch_list,
+                      String comply_advantage_result,
+                      String comply_advantage_url,
+                      String verification_status,
+                      String device_model,
+                      String os_version,
+                      String browser_major,
+                      String browser_version,
+                      String ua,
+                      String device_type,
+                      String device_vendor,
+                      String os_name,
+                      String browser_name,
+                      String issuePlace,
+                      String emissionDate,
+                      String ageRange,
+                      Integer savingAccountsCount,
+                      Integer financialIndustryDebtsCount,
+                      Integer solidarityIndustryDebtsCount,
+                      Integer serviceIndustryDebtsCount,
+                      Integer commercialIndustryDebtsCount,
+                      String ip,
+                      String frontImgUrl,
+                      String backImgUrl,
+                      String selfiImageUrl,
+                      String message,
+                      Integer responseStatus) {
         this.id = id;
         this.created_at = created_at;
         this.company = company;
@@ -48,48 +107,30 @@ public class ResponseIV implements Parcelable, Serializable {
         this.comply_advantage_result = comply_advantage_result;
         this.comply_advantage_url = comply_advantage_url;
         this.verification_status = verification_status;
+        this.device_model = device_model;
+        this.os_version = os_version;
+        this.browser_major = browser_major;
+        this.browser_version = browser_version;
+        this.ua = ua;
+        this.device_type = device_type;
+        this.device_vendor = device_vendor;
+        this.os_name = os_name;
+        this.browser_name = browser_name;
+        this.issuePlace = issuePlace;
+        this.emissionDate = emissionDate;
+        this.ageRange = ageRange;
+        this.savingAccountsCount = savingAccountsCount;
+        this.financialIndustryDebtsCount = financialIndustryDebtsCount;
+        this.solidarityIndustryDebtsCount= solidarityIndustryDebtsCount;
+        this.serviceIndustryDebtsCount = serviceIndustryDebtsCount;
+        this.commercialIndustryDebtsCount = commercialIndustryDebtsCount;
+        this.ip = ip;
+        this.frontImgUrl = frontImgUrl;
+        this.backImgUrl = backImgUrl;
+        this.selfiImageUrl = selfiImageUrl;
         this.message = message;
         this.responseStatus = responseStatus;
     }
-
-    protected ResponseIV(Parcel in) {
-        id = in.readString ( );
-        created_at = in.readString ( );
-        company = in.readString ( );
-        fullname = in.readString ( );
-        birth = in.readString ( );
-        document_type = in.readString ( );
-        document_number = in.readString ( );
-        byte tmpFace_match = in.readByte ( );
-        face_match = tmpFace_match == 0 ? null : tmpFace_match == 1;
-        byte tmpTemplate = in.readByte ( );
-        template = tmpTemplate == 0 ? null : tmpTemplate == 1;
-        byte tmpAlteration = in.readByte ( );
-        alteration = tmpAlteration == 0 ? null : tmpAlteration == 1;
-        byte tmpWatch_list = in.readByte ( );
-        watch_list = tmpWatch_list == 0 ? null : tmpWatch_list == 1;
-        comply_advantage_result = in.readString ( );
-        comply_advantage_url = in.readString ( );
-        verification_status = in.readString ( );
-        message = in.readString ( );
-        if (in.readByte ( ) == 0) {
-            responseStatus = null;
-        } else {
-            responseStatus = in.readInt ( );
-        }
-    }
-
-    public static final Creator<ResponseIV> CREATOR = new Creator<ResponseIV> ( ) {
-        @Override
-        public ResponseIV createFromParcel(Parcel in) {
-            return new ResponseIV (in);
-        }
-
-        @Override
-        public ResponseIV[] newArray(int size) {
-            return new ResponseIV[size];
-        }
-    };
 
     public String getId() {
         return id;
@@ -203,6 +244,175 @@ public class ResponseIV implements Parcelable, Serializable {
         this.verification_status = verification_status;
     }
 
+    public String getDevice_model() {
+        return device_model;
+    }
+
+    public void setDevice_model(String device_model) {
+        this.device_model = device_model;
+    }
+
+    public String getOs_version() {
+        return os_version;
+    }
+
+    public void setOs_version(String os_version) {
+        this.os_version = os_version;
+    }
+
+    public String getBrowser_major() {
+        return browser_major;
+    }
+
+    public void setBrowser_major(String browser_major) {
+        this.browser_major = browser_major;
+    }
+
+    public String getBrowser_version() {
+        return browser_version;
+    }
+
+    public void setBrowser_version(String browser_version) {
+        this.browser_version = browser_version;
+    }
+
+    public String getUa() {
+        return ua;
+    }
+
+    public void setUa(String ua) {
+        this.ua = ua;
+    }
+
+    public String getDevice_type() {
+        return device_type;
+    }
+
+    public void setDevice_type(String device_type) {
+        this.device_type = device_type;
+    }
+
+    public String getDevice_vendor() {
+        return device_vendor;
+    }
+
+    public void setDevice_vendor(String device_vendor) {
+        this.device_vendor = device_vendor;
+    }
+
+    public String getOs_name() {
+        return os_name;
+    }
+
+    public void setOs_name(String os_name) {
+        this.os_name = os_name;
+    }
+
+    public String getBrowser_name() {
+        return browser_name;
+    }
+
+    public void setBrowser_name(String browser_name) {
+        this.browser_name = browser_name;
+    }
+
+    public String getIssuePlace() {
+        return issuePlace;
+    }
+
+    public void setIssuePlace(String issuePlace) {
+        this.issuePlace = issuePlace;
+    }
+
+    public String getEmissionDate() {
+        return emissionDate;
+    }
+
+    public void setEmissionDate(String emissionDate) {
+        this.emissionDate = emissionDate;
+    }
+
+    public String getAgeRange() {
+        return ageRange;
+    }
+
+    public void setAgeRange(String ageRange) {
+        this.ageRange = ageRange;
+    }
+
+    public Integer getSavingAccountsCount() {
+        return savingAccountsCount;
+    }
+
+    public void setSavingAccountsCount(Integer savingAccountsCount) {
+        this.savingAccountsCount = savingAccountsCount;
+    }
+
+    public Integer getSolidarityIndustryDebtsCount() {
+        return solidarityIndustryDebtsCount;
+    }
+
+    public void setSolidarityIndustryDebtsCount(Integer solidarityIndustryDebtsCount) {
+        this.solidarityIndustryDebtsCount = solidarityIndustryDebtsCount;
+    }
+
+
+    public Integer getFinancialIndustryDebtsCount() {
+        return financialIndustryDebtsCount;
+    }
+
+    public void setFinancialIndustryDebtsCount(Integer financialIndustryDebtsCount) {
+        this.financialIndustryDebtsCount = financialIndustryDebtsCount;
+    }
+
+    public Integer getServiceIndustryDebtsCount() {
+        return serviceIndustryDebtsCount;
+    }
+
+    public void setServiceIndustryDebtsCount(Integer serviceIndustryDebtsCount) {
+        this.serviceIndustryDebtsCount = serviceIndustryDebtsCount;
+    }
+
+    public Integer getCommercialIndustryDebtsCount() {
+        return commercialIndustryDebtsCount;
+    }
+
+    public void setCommercialIndustryDebtsCount(Integer commercialIndustryDebtsCount) {
+        this.commercialIndustryDebtsCount = commercialIndustryDebtsCount;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getFrontImgUrl() {
+        return frontImgUrl;
+    }
+
+    public void setFrontImgUrl(String frontImgUrl) {
+        this.frontImgUrl = frontImgUrl;
+    }
+
+    public String getBackImgUrl() {
+        return backImgUrl;
+    }
+
+    public void setBackImgUrl(String backImgUrl) {
+        this.backImgUrl = backImgUrl;
+    }
+
+    public String getSelfiImageUrl() {
+        return selfiImageUrl;
+    }
+
+    public void setSelfiImageUrl(String selfiImageUrl) {
+        this.selfiImageUrl = selfiImageUrl;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -219,33 +429,159 @@ public class ResponseIV implements Parcelable, Serializable {
         this.responseStatus = responseStatus;
     }
 
+    protected ResponseIV(Parcel in) {
+        id = in.readString();
+        created_at = in.readString();
+        company = in.readString();
+        fullname = in.readString();
+        birth = in.readString();
+        document_type = in.readString();
+        document_number = in.readString();
+        byte tmpFace_match = in.readByte();
+        face_match = tmpFace_match == 0 ? null : tmpFace_match == 1;
+        byte tmpTemplate = in.readByte();
+        template = tmpTemplate == 0 ? null : tmpTemplate == 1;
+        byte tmpAlteration = in.readByte();
+        alteration = tmpAlteration == 0 ? null : tmpAlteration == 1;
+        byte tmpWatch_list = in.readByte();
+        watch_list = tmpWatch_list == 0 ? null : tmpWatch_list == 1;
+        comply_advantage_result = in.readString();
+        comply_advantage_url = in.readString();
+        verification_status = in.readString();
+        device_model = in.readString();
+        os_version = in.readString();
+        browser_major = in.readString();
+        browser_version = in.readString();
+        ua = in.readString();
+        device_type = in.readString();
+        device_vendor = in.readString();
+        os_name = in.readString();
+        browser_name = in.readString();
+        issuePlace = in.readString();
+        emissionDate = in.readString();
+        ageRange = in.readString();
+        if (in.readByte() == 0) {
+            savingAccountsCount = null;
+        } else {
+            savingAccountsCount = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            financialIndustryDebtsCount = null;
+        } else {
+            financialIndustryDebtsCount = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            solidarityIndustryDebtsCount = null;
+        } else {
+            solidarityIndustryDebtsCount = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            serviceIndustryDebtsCount = null;
+        } else {
+            serviceIndustryDebtsCount = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            commercialIndustryDebtsCount = null;
+        } else {
+            commercialIndustryDebtsCount = in.readInt();
+        }
+        ip = in.readString();
+        frontImgUrl = in.readString();
+        backImgUrl = in.readString();
+        selfiImageUrl = in.readString();
+        message = in.readString();
+        if (in.readByte() == 0) {
+            responseStatus = null;
+        } else {
+            responseStatus = in.readInt();
+        }
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(created_at);
+        dest.writeString(company);
+        dest.writeString(fullname);
+        dest.writeString(birth);
+        dest.writeString(document_type);
+        dest.writeString(document_number);
+        dest.writeByte((byte) (face_match == null ? 0 : face_match ? 1 : 2));
+        dest.writeByte((byte) (template == null ? 0 : template ? 1 : 2));
+        dest.writeByte((byte) (alteration == null ? 0 : alteration ? 1 : 2));
+        dest.writeByte((byte) (watch_list == null ? 0 : watch_list ? 1 : 2));
+        dest.writeString(comply_advantage_result);
+        dest.writeString(comply_advantage_url);
+        dest.writeString(verification_status);
+        dest.writeString(device_model);
+        dest.writeString(os_version);
+        dest.writeString(browser_major);
+        dest.writeString(browser_version);
+        dest.writeString(ua);
+        dest.writeString(device_type);
+        dest.writeString(device_vendor);
+        dest.writeString(os_name);
+        dest.writeString(browser_name);
+        dest.writeString(issuePlace);
+        dest.writeString(emissionDate);
+        dest.writeString(ageRange);
+        if (savingAccountsCount == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(savingAccountsCount);
+        }
+        if (financialIndustryDebtsCount == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(financialIndustryDebtsCount);
+        }
+        if (solidarityIndustryDebtsCount == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(solidarityIndustryDebtsCount);
+        }
+        if (serviceIndustryDebtsCount == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(serviceIndustryDebtsCount);
+        }
+        if (commercialIndustryDebtsCount == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(commercialIndustryDebtsCount);
+        }
+        dest.writeString(ip);
+        dest.writeString(frontImgUrl);
+        dest.writeString(backImgUrl);
+        dest.writeString(selfiImageUrl);
+        dest.writeString(message);
+        if (responseStatus == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(responseStatus);
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString (id);
-        parcel.writeString (created_at);
-        parcel.writeString (company);
-        parcel.writeString (fullname);
-        parcel.writeString (birth);
-        parcel.writeString (document_type);
-        parcel.writeString (document_number);
-        parcel.writeByte ((byte) (face_match == null ? 0 : face_match ? 1 : 2));
-        parcel.writeByte ((byte) (template == null ? 0 : template ? 1 : 2));
-        parcel.writeByte ((byte) (alteration == null ? 0 : alteration ? 1 : 2));
-        parcel.writeByte ((byte) (watch_list == null ? 0 : watch_list ? 1 : 2));
-        parcel.writeString (comply_advantage_result);
-        parcel.writeString (comply_advantage_url);
-        parcel.writeString (verification_status);
-        parcel.writeString (message);
-        if (responseStatus == null) {
-            parcel.writeByte ((byte) 0);
-        } else {
-            parcel.writeByte ((byte) 1);
-            parcel.writeInt (responseStatus);
+    public static final Creator<ResponseIV> CREATOR = new Creator<ResponseIV>() {
+        @Override
+        public ResponseIV createFromParcel(Parcel in) {
+            return new ResponseIV(in);
         }
-    }
+
+        @Override
+        public ResponseIV[] newArray(int size) {
+            return new ResponseIV[size];
+        }
+    };
 }

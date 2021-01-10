@@ -118,6 +118,9 @@ public class SelecCountryFragment extends Fragment {
                     btnDNI.setTextColor (getResources ( ).getColor (R.color.black));
                     btnLicense.setTextColor (getResources ( ).getColor (R.color.black));
                     btnPassport.setTextColor (getResources ( ).getColor (R.color.black));
+                    btnPassport.setCompoundDrawablesWithIntrinsicBounds(R.drawable.passport_icon_btn, 0, R.drawable.arrownex, 0);
+                    btnDNI.setCompoundDrawablesWithIntrinsicBounds(R.drawable.dni_icon_btn, 0, R.drawable.arrownex, 0);
+                    btnLicense.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_d_license, 0, R.drawable.arrownex, 0);
                 }
 
             }

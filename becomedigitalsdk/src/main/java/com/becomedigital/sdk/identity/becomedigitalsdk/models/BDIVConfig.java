@@ -13,14 +13,17 @@ public class BDIVConfig implements Parcelable, Serializable {
     private String contractId;
     private String validationTypes;
     private boolean allowLibraryLoading;
+    private String userId;
 
-    public BDIVConfig(String clienId, String clientSecret, String contractId, String validationTypes, boolean allowLibraryLoading, byte[] customerLogo) {
+
+    public BDIVConfig(String clienId, String clientSecret, String contractId, String validationTypes, boolean allowLibraryLoading, byte[] customerLogo, String userId) {
         this.clienId = clienId;
         this.customerLogo = customerLogo;
         this.clientSecret = clientSecret;
         this.contractId = contractId;
         this.validationTypes = validationTypes;
         this.allowLibraryLoading = allowLibraryLoading;
+        this.userId = userId;
     }
 
     protected BDIVConfig(Parcel in) {
@@ -30,6 +33,7 @@ public class BDIVConfig implements Parcelable, Serializable {
         contractId = in.readString ( );
         validationTypes = in.readString ( );
         allowLibraryLoading = in.readByte ( ) != 0;
+        userId = in.readString ( );
     }
 
     public static final Creator<BDIVConfig> CREATOR = new Creator<BDIVConfig> ( ) {
@@ -92,6 +96,14 @@ public class BDIVConfig implements Parcelable, Serializable {
         this.allowLibraryLoading = allowLibraryLoading;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -105,5 +117,6 @@ public class BDIVConfig implements Parcelable, Serializable {
         parcel.writeString (contractId);
         parcel.writeString (validationTypes);
         parcel.writeByte ((byte) (allowLibraryLoading ? 1 : 0));
+        parcel.writeString (userId);
     }
 }

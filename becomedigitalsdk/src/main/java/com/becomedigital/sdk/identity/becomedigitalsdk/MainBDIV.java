@@ -140,7 +140,10 @@ public class MainBDIV extends AppCompatActivity implements AsynchronousTask {
                 } else if (this.config.getContractId ( ).isEmpty ( )) {
                     setResulLoginError ("ContractId parameters cannot be empty");
                     return;
-                } else if (validationTypesSubs.length == 0) {
+                }else if (this.config.getUserId ( ).isEmpty ( )) {
+                    setResulLoginError ("UserId parameters cannot be empty");
+                    return;
+                }else if (validationTypesSubs.length == 0) {
                     setResulLoginError ("The validationTypes parameter cannot be empty");
                     return;
                 } else if (validationTypesSubs.length == 1) {
@@ -161,6 +164,7 @@ public class MainBDIV extends AppCompatActivity implements AsynchronousTask {
                 ((MyApplication) getApplication ( )).setClientId (this.config.getClienId ( ));
                 ((MyApplication) getApplication ( )).setClientSecret (this.config.getClientSecret ( ));
                 ((MyApplication) getApplication ( )).setContractId (this.config.getContractId ( ));
+                ((MyApplication) getApplication ( )).setUser_id(this.config.getUserId());
                 ((MyApplication) getApplication ( )).setValidationTypes (this.config.getValidationTypes ( ));
                 ((MyApplication) getApplication ( )).setAllowLibraryLoading (this.config.isAllowLibraryLoading ( ));
             }
@@ -213,6 +217,8 @@ public class MainBDIV extends AppCompatActivity implements AsynchronousTask {
 
     @Override
     public void onErrorTransaction(String errorMsn) {
+        getWindow ( ).clearFlags (WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        countdownToGetdata.cancel ( );
         mData.putExtra (KEY_ERROR, errorMsn);
         setResult (RESULT_FIRST_USER, mData);
         finish ( );

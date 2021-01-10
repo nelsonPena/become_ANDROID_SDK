@@ -111,7 +111,6 @@ public class ValidateStatusRest {
     private File video = null;
     private File document1 = null;
     private File document2 = null;
-    String inActiveDate = "";
 
     public void addDataServer(final Activity activity, final AsynchronousTask asynchronousTask) {
         AsyncTask.execute(() -> {
@@ -122,10 +121,6 @@ public class ValidateStatusRest {
                 String[] validationTypesSubs = ((MyApplication) activity.getApplicationContext()).getValidationTypes().split(split);
                 boolean containsVideo = false;
                 boolean isPassword = false;
-                Date currentTime = Calendar.getInstance().getTime();
-                SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault());
-                inActiveDate = format1.format(currentTime);
-                ((MyApplication) activity.getApplicationContext()).setUser_id(inActiveDate);
 
                 for (String validationTypesSub : validationTypesSubs) {
                     if (validationTypesSub.equals("VIDEO")) {
@@ -216,7 +211,7 @@ public class ValidateStatusRest {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("contract_id", ((MyApplication) activity.getApplicationContext()).getContractId())
-                    .addFormDataPart("user_id", inActiveDate)
+                    .addFormDataPart("user_id",  ((MyApplication) activity.getApplicationContext()).getUser_id())
                     .addFormDataPart("country", ((MyApplication) activity.getApplicationContext()).getSelectedCountyCo2().toUpperCase())
                     .addFormDataPart("file_type", "passport")
                     .addFormDataPart("document1", "document1.jpg", RequestBody.create(MediaType.parse("image/jpg"), document1))
@@ -230,7 +225,7 @@ public class ValidateStatusRest {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("contract_id", ((MyApplication) activity.getApplicationContext()).getContractId())
-                    .addFormDataPart("user_id", inActiveDate)
+                    .addFormDataPart("user_id", ((MyApplication) activity.getApplicationContext()).getUser_id())
                     .addFormDataPart("country", ((MyApplication) activity.getApplicationContext()).getSelectedCountyCo2().toUpperCase())
                     .addFormDataPart("file_type", fileType)
                     .addFormDataPart("document1",
@@ -252,7 +247,7 @@ public class ValidateStatusRest {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("contract_id", ((MyApplication) activity.getApplicationContext()).getContractId())
-                    .addFormDataPart("user_id", inActiveDate)
+                    .addFormDataPart("user_id", ((MyApplication) activity.getApplicationContext()).getUser_id())
                     .addFormDataPart("country", ((MyApplication) activity.getApplicationContext()).getSelectedCountyCo2().toUpperCase())
                     .addFormDataPart("file_type", "passport")
                     .addFormDataPart("video",
@@ -272,7 +267,7 @@ public class ValidateStatusRest {
             requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("contract_id", ((MyApplication) activity.getApplicationContext()).getContractId())
-                    .addFormDataPart("user_id", inActiveDate)
+                    .addFormDataPart("user_id", ((MyApplication) activity.getApplicationContext()).getUser_id())
                     .addFormDataPart("country", ((MyApplication) activity.getApplicationContext()).getSelectedCountyCo2().toUpperCase())
                     .addFormDataPart("file_type", fileType)
                     .addFormDataPart("video",
@@ -322,8 +317,14 @@ public class ValidateStatusRest {
 
                             if (Jobject.has("apimsg")) {
                                 asynchronousTask.onReceiveResultsTransaction(new ResponseIV(ResponseIV.PENDING, Jobject.getString("apimsg")), USERRESPONSE);
-                            } else if (Jobject.has("verification")) {
+                            } else if (Jobject.has("verification") &&
+                                    Jobject.has("userAgent") &&
+                                    Jobject.has("registry") &&
+                                    Jobject.has("media")) {
                                 JSONObject JobjectV = new JSONObject(Jobject.getString("verification"));
+                                JSONObject JobjectUA = new JSONObject(Jobject.getString("userAgent"));
+                                JSONObject JobjectR = new JSONObject(Jobject.getString("registry"));
+                                JSONObject JobjectM = new JSONObject(Jobject.getString("media"));
 
                                 if (JobjectV.has("verification_status")) {
 
@@ -344,6 +345,7 @@ public class ValidateStatusRest {
                                             if (!JobjectV.getString("watch_list").equals("true"))
                                                 watch_list = true;
                                             JSONObject JComplyAdvantage = new JSONObject(Jobject.getString("comply_advantage"));
+
                                             ResponseIV responseIV = new ResponseIV(
                                                     Jobject.getString("id"),
                                                     Jobject.getString("created_at"),
@@ -359,6 +361,27 @@ public class ValidateStatusRest {
                                                     JComplyAdvantage.getString("comply_advantage_result"),
                                                     JComplyAdvantage.getString("comply_advantage_url"),
                                                     JobjectV.getString("verification_status"),
+                                                    (JobjectUA.has("device_model") ? JobjectUA.getString("device_model") : ""),
+                                                    (JobjectUA.has("os_version") ? JobjectUA.getString("os_version") : ""),
+                                                    (JobjectUA.has("browser_major") ? JobjectUA.getString("browser_major") : ""),
+                                                    (JobjectUA.has("browser_version") ? JobjectUA.getString("browser_version") : ""),
+                                                    (JobjectUA.has("ua") ? JobjectUA.getString("ua") : ""),
+                                                    (JobjectUA.has("device_type") ? JobjectUA.getString("device_type") : ""),
+                                                    (JobjectUA.has("device_vendor") ? JobjectUA.getString("device_vendor") : ""),
+                                                    (JobjectUA.has("os_name") ? JobjectUA.getString("os_name") : ""),
+                                                    (JobjectUA.has("browser_name") ? JobjectUA.getString("browser_name") : ""),
+                                                    (JobjectR.has("issuePlace") ? JobjectR.getString("issuePlace") : ""),
+                                                    (JobjectR.has("emissionDate") ? JobjectR.getString("emissionDate") : ""),
+                                                    (JobjectR.has("ageRange") ? JobjectR.getString("ageRange") : ""),
+                                                    (JobjectR.has("savingAccountsCount") ? JobjectR.getInt("savingAccountsCount") : 0),
+                                                    (JobjectR.has("financialIndustryDebtsCount") ? JobjectR.getInt("financialIndustryDebtsCount") : 0),
+                                                    (JobjectR.has("solidarityIndustryDebtsCount") ? JobjectR.getInt("solidarityIndustryDebtsCount") : 0),
+                                                    (JobjectR.has("serviceIndustryDebtsCount") ? JobjectR.getInt("serviceIndustryDebtsCount") : 0),
+                                                    (JobjectR.has("commercialIndustryDebtsCount") ? JobjectR.getInt("commercialIndustryDebtsCount") : 0),
+                                                    (Jobject.has("ip") ? Jobject.getString("ip") : ""),
+                                                    (JobjectM.has("frontImgUrl") ? JobjectM.getString("frontImgUrl") : ""),
+                                                    (JobjectM.has("backImgUrl") ? JobjectM.getString("backImgUrl") : ""),
+                                                    (JobjectM.has("selfiImageUrl") ? JobjectM.getString("selfiImageUrl") : ""),
                                                     "verification complete",
                                                     ResponseIV.SUCCES
                                             );
