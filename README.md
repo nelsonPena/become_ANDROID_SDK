@@ -90,6 +90,7 @@ validatiopnTypes | ""
 clientSecret | ""
 clientId | ""
 contractId  | ""
+userID  | ""
 
 
 Mostrará el siguiente error por consola:
