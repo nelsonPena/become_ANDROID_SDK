@@ -64,7 +64,8 @@ En el método onCreate () de su clase de aplicación, inicialice Become utilizan
         String clientSecret =  "your client Secret here" ;  
         String clientId =  "your client ID here" ;  
         String contractId =  "your contract ID here";
-
+        String userId = "your user ID here"
+	
         //Instancia para iniciar la interfaz
         BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
             new BDIVConfig (clientId,  
@@ -72,7 +73,8 @@ En el método onCreate () de su clase de aplicación, inicialice Become utilizan
                     contractId,  
                     validatiopnTypes,  
                     true,  
-                    null  
+                    null,
+		    userId
         ));
 	  }
 	}
@@ -163,22 +165,43 @@ En este apartado encontrará la respuesta a partir de la validación del proceso
 ## Estructura para el retorno de la información
 Los siguientes son los parámetros que permiten el retorno de la información capturada por el sistema.
 
-	private String id;  
-	private String created_at;  
-	private String company;  
-	private String fullname;  
-	private String birth;  
-	private String document_type;  
-	private String document_number;  
-	private Boolean face_match;  
-	private Boolean template;  
-	private Boolean alteration;  
-	private Boolean watch_list;  
-	private String comply_advantage_result;  
-	private String comply_advantage_url;  
-	private String verification_status;  
-	private String message;  
-	private Integer responseStatus;
+	    String id;
+	    String created_at;
+	    String company;
+	    String fullname;
+	    String birth;
+	    String document_type;
+	    String document_number;
+	    Boolean face_match;
+	    Boolean template;
+	    Boolean alteration;
+	    Boolean watch_list;
+	    String comply_advantage_result;
+	    String comply_advantage_url;
+	    String verification_status;
+	    String device_model;
+	    String os_version;
+	    String browser_major;
+	    String browser_version;
+	    String ua;
+	    String device_type;
+	    String device_vendor;
+	    String os_name;
+	    String browser_name;
+	    String issuePlace;
+	    String emissionDate;
+	    String ageRange;
+	    Integer savingAccountsCount;
+	    Integer financialIndustryDebtsCount;
+	    Integer solidarityIndustryDebtsCount;
+	    Integer serviceIndustryDebtsCount;
+	    Integer commercialIndustryDebtsCount;
+	    String ip;
+	    String frontImgUrl;
+	    String backImgUrl;
+	    String selfiImageUrl;
+	    String message;
+	    Integer responseStatus;
 
 Ejemplo de la respuesta:
 
@@ -249,52 +272,26 @@ Esta sección se encarga de proporcionar el fragmento de código para la impleme
         	  String clientSecret = textClientSecret.getText ( ).toString ( ).isEmpty ( ) ? "FKLDM63GPH89TISBXNZ4YJUE57WRQA25" : textClientSecret.getText ( ).toString ( );  
         	  String clientId = textClientId.getText ( ).toString ( ).isEmpty ( ) ? "acc_demo" : textClientId.getText ( ).toString ( );  
         	  String contractId = textContractId.getText ( ).toString ( ).isEmpty ( ) ? "2" : textContractId.getText ( ).toString ( );  
+        	  Date currentTime = Calendar.getInstance().getTime();
+		  SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault());
+		  String inActiveDate = format1.format(currentTime); // identificador de la transacción // identificador de la transacción
         	  
-        	  BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
+		  BecomeResponseManager.getInstance ( ).startAutentication (MainActivity.this,  
         	      new BDIVConfig (clientId,  
         	      clientSecret,  
         	      contractId,  
         	      validatiopnTypes,  
         	      true,  
-        	      byteArray  
+        	      byteArray,
+		      inActiveDate
         	  ));  
             
         	  BecomeResponseManager.getInstance ( ).registerCallback (mCallbackManager, new BecomeInterfaseCallback ( ) {  
-        	    @Override  	  
-        	    public void onSuccess(final ResponseIV responseIV) {  
-        	      String id = responseIV.getId ( );  
-        	      String created_at = responseIV.getCreated_at ( );  
-        	      String company = responseIV.getCompany ( );  
-        	      String fullname = responseIV.getFullname ( );  
-        	      String birth = responseIV.getBirth ( );  
-        	      String document_type = responseIV.getDocument_type ( );  
-        	      String document_number = responseIV.getDocument_number ( );  
-        	      Boolean face_match = responseIV.getFace_match ( );  
-        	      Boolean template = responseIV.getTemplate ( );  
-        	      Boolean alteration = responseIV.getAlteration ( );  
-        	      Boolean watch_list = responseIV.getWatch_list ( );  
-        	      String comply_advantage_result = responseIV.getComply_advantage_result ( );  
-        	      String comply_advantage_url = responseIV.getComply_advantage_url ( );  
-        	      String verification_status = responseIV.getVerification_status ( );  
-        	      String message = responseIV.getMessage ( );  
-        	      Integer responseStatus = responseIV.getResponseStatus ( );  
-        	      String textFinal = "id: " +  
-        	            "\ncreated_at: " + created_at +  
-        	            "\ncompany: " + company +  
-        	            "\nfullname: " + fullname +  
-        	            "\nbirth: " + birth +  
-        	            "\ndocument_type: " + document_type +  
-        	            "\ndocument_number: " + document_number +  
-        	            "\nface_match: " + face_match +  
-        	            "\ntemplate: " + template +  
-        	            "\nalteration: " + alteration +  
-        	            "\nwatch_list: " + watch_list +  
-        	            "\ncomply_advantage_result: " + comply_advantage_result +  
-        	            "\ncomply_advantage_url: " + comply_advantage_url +  
-        	            "\nverification_status: " + verification_status +  
-        	            "\nmessage: " + message +  
-        	            "\nresponseStatus: " + responseStatus;  
-        	  }  
+        	  
+		  @Override  	  
+              public void onSuccess(final ResponseIV responseIV) {  
+        	  // Respuesta SDK
+	      }  
         	  
               @Override  
               public void onCancel() {  
